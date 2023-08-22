@@ -1,0 +1,11 @@
+h1 {
+  font-size: 3rem;
+  font-family: sans-serif;
+  color: skyblue;
+  text-align: center;
+}
+
+img {
+  width: 15rem;
+  height: 15rem;
+}
