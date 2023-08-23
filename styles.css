@@ -76,6 +76,14 @@ input {
   height: 1.5rem;
 }
 
+#loupe:hover {
+  transform: scale(1.1);
+}
+
+#loupe:active {
+  transform: scale(0.9);
+}
+
 #searchBtn {
   background-color: transparent;
   outline: none;
@@ -343,4 +351,11 @@ input:checked + .slider:before {
 }
 .slider.round:before {
   border-radius: 50%;
+}
+
+a img {
+  width: 5rem;
+  height: auto;
+  padding: 0;
+  margin: 0;
 }

@@ -130,10 +130,16 @@ searchBarEl.addEventListener("input", () => {
   searchInputValue = searchBarEl.value;
 });
 searchBtnEl.addEventListener("click", () => {
-  event.preventDefault();
-  getInfo(searchInputValue);
-  form.reset();
-  searchInputValue = "";
+  if (searchInputValue === "" || searchInputValue === undefined) {
+    console.log("Empty search");
+    searchBarEl.setCustomValidity("Please fill in a valid city name");
+  } else {
+    getInfo(searchInputValue);
+    form.reset();
+    searchInputValue = "";
+    searchBarEl.setCustomValidity("");
+    event.preventDefault();
+  }
 });
 checkboxSwitchBtn.addEventListener("change", () => {
   switchUnitController(tempMetric, tempImperial, windMetric, windImperial);
