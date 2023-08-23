@@ -291,7 +291,8 @@ img {
 }
 
 body .botContent div,
-div {
+div,
+#fText {
   font-size: 1rem;
 }
 

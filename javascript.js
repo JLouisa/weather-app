@@ -23,16 +23,24 @@ const humidityEl = document.getElementById("humidity");
 const checkboxSwitchBtn = document.getElementById("checkbox");
 const fahrenUnitEl = document.getElementById("fahrenUnit");
 const windUnitEl = document.getElementById("windUnit");
+const fTextEl = document.getElementById("fText");
 
 //! Loading local storages
 const loadLocalStorage = (() => {
   const savedCity = JSON.parse(localStorage.getItem("city"));
   return savedCity;
 })();
+const loadLocalStorageUnits = (() => {
+  const savedUnits = JSON.parse(localStorage.getItem("imperial"));
+  checkboxSwitchBtn.checked = savedUnits;
+})();
 
 //! Saving to Local Storage
 function saveLocalStorage(data) {
   localStorage.setItem("city", JSON.stringify(data));
+}
+function saveLocalStorageUnit() {
+  localStorage.setItem("imperial", JSON.stringify(checkboxSwitchBtn.checked));
 }
 
 //! Render
@@ -100,19 +108,20 @@ async function getInfo(city) {
   }
 })();
 
-function switchToImperial(temp1, temp2, wind1, tU, wU) {
+function switchToImperial(temp1, temp2, wind1, tU, wU, text) {
   celciusNumEl.textContent = parseFloat(temp1).toFixed(0);
   fahrenheitNumEl.textContent = parseFloat(temp2).toFixed(0);
   windEl.textContent = wind1;
   fahrenUnitEl.textContent = tU;
   windUnitEl.textContent = wU;
+  fTextEl.textContent = text;
 }
 
 function switchUnitController(tempM, tempI, windM, windI) {
   if (checkboxSwitchBtn.checked) {
-    switchToImperial(tempI, tempM, windI, "°C", "mph");
+    switchToImperial(tempI, tempM, windI, "°C", "mph", "Temperature Celsius:");
   } else {
-    switchToImperial(tempM, tempI, windM, "°F", "kmh");
+    switchToImperial(tempM, tempI, windM, "°F", "kmh", "Temperature Fahrenheit:");
   }
 }
 
@@ -128,4 +137,5 @@ searchBtnEl.addEventListener("click", () => {
 });
 checkboxSwitchBtn.addEventListener("change", () => {
   switchUnitController(tempMetric, tempImperial, windMetric, windImperial);
+  saveLocalStorageUnit();
 });
