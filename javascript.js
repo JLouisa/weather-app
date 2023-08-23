@@ -1,12 +1,9 @@
-// Africa: Cairo (Egypt)
-// Asia: Tokyo (Japan)
-// Europe: Paris (France)
-// North America: Washington, D.C. (United States)
-// South America: Buenos Aires (Argentina)
-// Australia/Oceania: Wellington (New Zealand)
-
 //! Variables
 let searchInputValue;
+let tempMetric = "";
+let tempImperial = "";
+let windMetric = "";
+let windImperial = "";
 
 //! DOM Caches
 let currentWeatherConditionImgEl = document.querySelector("#weatherIcon2");
@@ -23,6 +20,9 @@ const windDirectionEl = document.getElementById("windDirection");
 const indexUVEl = document.getElementById("indexUV");
 const windEl = document.getElementById("wind");
 const humidityEl = document.getElementById("humidity");
+const checkboxSwitchBtn = document.getElementById("checkbox");
+const fahrenUnitEl = document.getElementById("fahrenUnit");
+const windUnitEl = document.getElementById("windUnit");
 
 //! Loading local storages
 const loadLocalStorage = (() => {
@@ -36,18 +36,33 @@ function saveLocalStorage(data) {
 }
 
 //! Render
-async function showWeatherInfo(icon, tempC, city, country, region, tempF, condition, windDir, uv, windMph, humidity) {
+async function showWeatherInfo(
+  icon,
+  tempC,
+  city,
+  country,
+  region,
+  tempF,
+  condition,
+  windDir,
+  uv,
+  windKph,
+  windMph,
+  humidity
+) {
   currentWeatherConditionImgEl.src = await icon;
-  celciusNumEl.textContent = await tempC;
   cityEl.textContent = await city;
   countryEl.textContent = await country;
   regionEl.textContent = await region;
-  fahrenheitNumEl.textContent = await tempF;
   weatherConditionEl.textContent = await condition;
   windDirectionEl.textContent = await windDir;
   indexUVEl.textContent = await uv;
-  windEl.textContent = await windMph;
   humidityEl.textContent = await humidity;
+  tempMetric = await tempC;
+  tempImperial = await tempF;
+  windMetric = await windKph;
+  windImperial = await windMph;
+  switchUnitController(await tempC, await tempF, await windKph, await windMph);
   saveLocalStorage(await city);
 }
 
@@ -68,6 +83,7 @@ async function getInfo(city) {
     result.current.condition.text,
     result.current.wind_dir,
     result.current.uv,
+    result.current.wind_kph,
     result.current.wind_mph,
     result.current.humidity,
     result
@@ -84,6 +100,22 @@ async function getInfo(city) {
   }
 })();
 
+function switchToImperial(temp1, temp2, wind1, tU, wU) {
+  celciusNumEl.textContent = parseFloat(temp1).toFixed(0);
+  fahrenheitNumEl.textContent = parseFloat(temp2).toFixed(0);
+  windEl.textContent = wind1;
+  fahrenUnitEl.textContent = tU;
+  windUnitEl.textContent = wU;
+}
+
+function switchUnitController(tempM, tempI, windM, windI) {
+  if (checkboxSwitchBtn.checked) {
+    switchToImperial(tempI, tempM, windI, "°C", "mph");
+  } else {
+    switchToImperial(tempM, tempI, windM, "°F", "kmh");
+  }
+}
+
 //! The Listeners
 searchBarEl.addEventListener("input", () => {
   searchInputValue = searchBarEl.value;
@@ -94,16 +126,6 @@ searchBtnEl.addEventListener("click", () => {
   form.reset();
   searchInputValue = "";
 });
-
-//   console.log(`Icon: https:${result.current.condition.icon}`);
-//   console.log(`Temperature in Celsius ${result.current.temp_c}°C`);
-//   console.log(`City: ${result.location.name}`);
-//   console.log(`Country ${result.location.country}`);
-//   console.log(`Region: ${result.location.region}`);
-//   console.log(`Temperature in fahrenheit  ${result.current.temp_f}°F`);
-//   console.log(`The weather is ${result.current.condition.text}`);
-//   console.log(`Wind direction: ${result.current.wind_dir}`);
-//   console.log(`The UV is ${result.current.uv}`);
-//   //   console.log(`Wind Speed: ${result.current.wind_kph}km/p`);
-//   console.log(`Wind Speed: ${result.current.wind_mph}mph`);
-//   console.log(`Humidity: ${result.current.humidity}g.m-3`);
+checkboxSwitchBtn.addEventListener("change", () => {
+  switchUnitController(tempMetric, tempImperial, windMetric, windImperial);
+});
