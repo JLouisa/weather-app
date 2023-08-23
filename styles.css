@@ -1,62 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+:root {
+  font-family: "Alata", sans-serif;
+  font-family: "Roboto", sans-serif;
+  --accentDark: #1f8d4d;
+  --fontColor: #f7f5f5;
+  --borderColor: #374958;
+  --bg-color: #ebebeb;
+}
+
 html {
   font-size: inherit;
 }
 
 body {
+  background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
   flex: 1;
-  /* width: 100vw; */
   height: 100vh;
   font-size: 1.5rem;
 }
 
-nav > * {
-  border: 1px solid green;
-}
-
-nav,
-footer {
-  position: relative;
-  border: 1px solid green;
+nav {
+  border-bottom: 2px solid var(--borderColor);
   height: 10vh;
   padding: 1em;
+}
+
+.navigation,
+footer {
+  position: relative;
   display: grid;
   grid-template: 1fr / repeat(3, 1fr);
   justify-content: center;
   align-content: center;
 }
 
+footer {
+  border-top: 2px solid var(--borderColor);
+  padding: 1em;
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 form {
+  position: relative;
   grid-area: 1/2/2/3;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  padding: 0;
+  margin: 0;
+  flex: 0;
 }
 
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.searhBar {
+  position: relative;
+}
+
+input {
+  width: 20rem;
+  height: 2rem;
+  margin: 5px;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  border: none;
+  outline: 1px solid black;
+}
+
+#loupe {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+#searchBtn {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  position: relative;
+  right: 4rem;
 }
 
 .main {
-  border: 1px solid red;
   display: grid;
   grid-template: repeat(3, 1fr) / 1fr 3fr 1fr;
   height: 100%;
-}
-
-h1 {
-  font-size: 3rem;
-  font-family: sans-serif;
-  color: skyblue;
-  text-align: center;
-  grid-area: 1/1/2/2;
-  align-self: start;
-  padding: 0;
-  margin: 0;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  margin: 1rem;
 }
 
 img {
@@ -87,7 +121,7 @@ img {
 }
 
 .weatherIcon {
-  background-color: blue;
+  background-color: skyblue;
   flex: 1;
   display: flex;
   justify-content: center;
@@ -96,7 +130,7 @@ img {
 
 .temp {
   flex: 1;
-  background-color: red;
+  background-color: lightcoral;
   font-size: 10rem;
   display: flex;
   align-items: center;
@@ -106,26 +140,29 @@ img {
 .midContent {
   grid-area: 2/1/3/2;
   display: flex;
+  gap: 1rem;
 }
 
 .midright {
   flex: 1;
-  background-color: green;
+  background-color: var(--fontColor);
 }
 
 .midleft {
   flex: 1;
-  background-color: gold;
+  background-color: var(--fontColor);
 }
 
 .botContent {
   grid-area: 3/1/4/2;
   display: grid;
   grid-template: 1fr / repeat(3, 1fr);
+  gap: 0px 1rem;
+  background-color: var(--bg-color);
 }
 
 .top {
-  background-color: lightcoral;
+  background-color: lightgoldenrodyellow;
   grid-area: 1/1/2/2;
 }
 .middle {
@@ -144,6 +181,9 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0px 0px 0.3rem 0.005rem;
 }
 
 .botContent img,
@@ -171,6 +211,9 @@ img {
   align-items: space-around;
   font-size: 1.5rem;
   padding: 1em;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0px 0px 0.3rem 0.005rem;
 }
 
 #celsious {
@@ -180,7 +223,6 @@ img {
 
 .midright span,
 .midleft span {
-  /* text-align: end; */
   font-size: 2rem;
 }
 
@@ -197,9 +239,58 @@ img {
 
 .content {
   gap: 1rem 0;
+  position: relative;
 }
 
-.botContent {
+.topContent {
   border-radius: 10px;
-  box-shadow: 1px 4px 5px solid rgba(0, 0, 0, 0.117);
+  position: relative;
+  box-shadow: 0px 0px 0.3rem 0.005rem;
+}
+
+.top,
+.midright,
+.weatherIcon {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.bot,
+.temp,
+.midleft {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#navTitle {
+  font-size: 3rem;
+  font-family: sans-serif;
+  color: var(--borderColor);
+  text-align: end;
+  grid-area: 1/1/2/2;
+  padding: 0;
+  margin: 0;
+  font-weight: 700;
+}
+
+#navTitleHalf {
+  color: var(--accentDark);
+}
+
+#city,
+#country,
+#region,
+#fahrenheitNum,
+#weatherCondition,
+#windDirection,
+#humidity,
+#wind,
+#indexUV {
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+body .botContent div,
+div {
+  font-size: 1rem;
 }

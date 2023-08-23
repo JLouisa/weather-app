@@ -9,7 +9,7 @@
 let searchInputValue = "Amsterdam";
 
 //! DOM Caches
-let currentWeatherConditionImgEl = document.querySelector("img");
+let currentWeatherConditionImgEl = document.querySelector("#weatherIcon2");
 const form = document.querySelector("form");
 const searchBarEl = document.getElementById("searchBar");
 const searchBtnEl = document.getElementById("searchBtn");
