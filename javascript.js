@@ -5,15 +5,17 @@ async function getInfo(city) {
     mode: "cors",
   });
   let result = await response.json();
-  console.log(`Country: ${result.location.name}`);
+  console.log(`City: ${result.location.name}`);
+  console.log(`Country ${result.location.country}`);
   console.log(`Region: ${result.location.region}`);
-  console.log(`Time-zone ${result.location.tz_id}mph`);
   console.log(`Temperature in Celsius ${result.current.temp_c}°C`);
   console.log(`Temperature in fahrenheit  ${result.current.temp_f}°F`);
   console.log(`The weather is ${result.current.condition.text}`);
   console.log(`The UV is ${result.current.uv}`);
   console.log(`Humidity: ${result.current.humidity}g.m-3`);
   console.log(`Wind direction: ${result.current.wind_dir}`);
+  console.log(`Wind Speed: ${result.current.wind_kph}km/p`);
+  console.log(`Wind Speed: ${result.current.wind_mph}mph`);
   console.log(`Icon: https:${result.current.condition.icon}`);
   currentWeatherConditionImgEl.src = `https:${result.current.condition.icon}`;
   return result;
@@ -54,4 +56,4 @@ searchBtnEl.addEventListener("click", () => {
   searchInputValue = "";
 });
 
-getInfo(searchInputValue);
+// getInfo(searchInputValue);
