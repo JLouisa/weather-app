@@ -34,7 +34,13 @@ let currentWeatherConditionImgEl = document.querySelector("img");
 const form = document.querySelector("form");
 const searchBarEl = document.getElementById("searchBar");
 const searchBtnEl = document.getElementById("searchBtn");
-// const clearBtnEl = document.getElementById("clearBtn");
+const weatherIcon = document.querySelector(".weatherIcon");
+const temp = document.querySelector(".temp");
+const midright = document.querySelector(".midright");
+const midleft = document.querySelector(".midleft");
+const top1 = document.querySelector(".top");
+const middle = document.querySelector(".middle");
+const bot = document.querySelector(".bot");
 
 //! The Listeners
 searchBarEl.addEventListener("input", () => {
@@ -47,11 +53,5 @@ searchBtnEl.addEventListener("click", () => {
   form.reset();
   searchInputValue = "";
 });
-
-// clearBtnEl.addEventListener("click", () => {
-//   event.preventDefault();
-//   form.reset();
-//   searchInputValue = "";
-// });
 
 getInfo(searchInputValue);
