@@ -18,6 +18,7 @@ async function getInfo(city) {
   console.log(`Wind Speed: ${result.current.wind_mph}mph`);
   console.log(`Icon: https:${result.current.condition.icon}`);
   currentWeatherConditionImgEl.src = `https:${result.current.condition.icon}`;
+  showWeatherInfo();
   return result;
 }
 
@@ -43,6 +44,19 @@ const midleft = document.querySelector(".midleft");
 const top1 = document.querySelector(".top");
 const middle = document.querySelector(".middle");
 const bot = document.querySelector(".bot");
+
+async function showWeatherInfo() {
+  const celciusNumEl = document.getElementById("celciusNum");
+  const cityEl = document.getElementById("city");
+  const countryEl = document.getElementById("country");
+  const regionEl = document.getElementById("region");
+  const fahrenheitNumEl = document.getElementById("fahrenheitNum");
+  const weatherConditionEl = document.getElementById("weatherCondition");
+  const windDirectionEl = document.getElementById("windDirection");
+  const indexUVEl = document.getElementById("indexUV");
+  const windEl = document.getElementById("wind");
+  const humidityEl = document.getElementById("humidity");
+}
 
 //! The Listeners
 searchBarEl.addEventListener("input", () => {
