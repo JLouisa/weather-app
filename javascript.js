@@ -77,7 +77,7 @@
 
   async function getInfo(city) {
     const api = "06b2be10d92d45e6ba891712232208";
-    const url = `http://api.weatherapi.com/v1/current.json?key=${api}&q=${city}`;
+    const url = `https://api.weatherapi.com/v1/current.json?key=${api}&q=${city}`;
     const response = await fetch(url, {
       mode: "cors",
     });
