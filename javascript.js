@@ -6,20 +6,13 @@
 // Australia/Oceania: Wellington (New Zealand)
 
 //! Variables
-let searchInputValue = "Amsterdam";
+let searchInputValue;
 
 //! DOM Caches
 let currentWeatherConditionImgEl = document.querySelector("#weatherIcon2");
 const form = document.querySelector("form");
 const searchBarEl = document.getElementById("searchBar");
 const searchBtnEl = document.getElementById("searchBtn");
-// const weatherIcon = document.querySelector(".weatherIcon");
-// const temp = document.querySelector(".temp");
-// const midright = document.querySelector(".midright");
-// const midleft = document.querySelector(".midleft");
-// const top1 = document.querySelector(".top");
-// const middle = document.querySelector(".middle");
-// const bot = document.querySelector(".bot");
 const celciusNumEl = document.getElementById("celciusNum");
 const cityEl = document.getElementById("city");
 const countryEl = document.getElementById("country");
@@ -30,6 +23,17 @@ const windDirectionEl = document.getElementById("windDirection");
 const indexUVEl = document.getElementById("indexUV");
 const windEl = document.getElementById("wind");
 const humidityEl = document.getElementById("humidity");
+
+//! Loading local storages
+const loadLocalStorage = (() => {
+  const savedCity = JSON.parse(localStorage.getItem("city"));
+  return savedCity;
+})();
+
+//! Saving to Local Storage
+function saveLocalStorage(data) {
+  localStorage.setItem("city", JSON.stringify(data));
+}
 
 //! Render
 async function showWeatherInfo(icon, tempC, city, country, region, tempF, condition, windDir, uv, windMph, humidity) {
@@ -44,19 +48,8 @@ async function showWeatherInfo(icon, tempC, city, country, region, tempF, condit
   indexUVEl.textContent = await uv;
   windEl.textContent = await windMph;
   humidityEl.textContent = await humidity;
+  saveLocalStorage(await city);
 }
-
-//! The Listeners
-searchBarEl.addEventListener("input", () => {
-  searchInputValue = searchBarEl.value;
-});
-searchBtnEl.addEventListener("click", () => {
-  event.preventDefault();
-  getInfo(searchInputValue);
-  console.log(searchInputValue);
-  form.reset();
-  searchInputValue = "";
-});
 
 async function getInfo(city) {
   const api = "06b2be10d92d45e6ba891712232208";
@@ -83,7 +76,24 @@ async function getInfo(city) {
   return result;
 }
 
-getInfo(searchInputValue);
+(function newOrSaved() {
+  if (loadLocalStorage !== null) {
+    getInfo(loadLocalStorage);
+  } else {
+    getInfo("Amsterdam");
+  }
+})();
+
+//! The Listeners
+searchBarEl.addEventListener("input", () => {
+  searchInputValue = searchBarEl.value;
+});
+searchBtnEl.addEventListener("click", () => {
+  event.preventDefault();
+  getInfo(searchInputValue);
+  form.reset();
+  searchInputValue = "";
+});
 
 //   console.log(`Icon: https:${result.current.condition.icon}`);
 //   console.log(`Temperature in Celsius ${result.current.temp_c}°C`);
