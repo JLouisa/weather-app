@@ -12,19 +12,35 @@
 <body>
     <nav>
         <h1>Weatherly</h1>
-    </nav>
-    <main>
-        <div>
-            <img src="" alt="Current Weather Conditions">
-        </div>
         <form action="POSt">
             <label for="searhBar"></label>
             <input type="text" id="searchBar" name="searchBar" placeholder="City">
             <button type="submit" id="searchBtn">Search</button>
-            <button id="clearBtn">Clear</button>
+            <!-- <button id="clearBtn">Clear</button> -->
         </form>
-    </main>
-    <footer></footer>
+    </nav>
+    <div class="main">
+        <div class="side sideLeft"></div>
+        <div class="content">
+            <div class="topContent mid">
+                <div class="weatherIcon">
+                    <img src="" alt="Current Weather Conditions">
+                </div>
+                <div class="temp">20&#x2103;</div>
+            </div>
+            <div class="midContent mid">
+                <div class="midright"></div>
+                <div class="midleft"></div>
+            </div>
+            <div class="botContent mid">
+                <div class="top"></div>
+                <div class="middle"></div>
+                <div class="bot"></div>
+            </div>
+        </div>
+        <div class="side sideRight"></div>
+    </div>
+    <footer>©2023 | Jonathan Louisa</footer>
 </body>
 
 </html>

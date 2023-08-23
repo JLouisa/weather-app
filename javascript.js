@@ -11,6 +11,7 @@ async function getInfo(city) {
   console.log(`Temperature in Celsius ${result.current.temp_c}°C`);
   console.log(`Temperature in fahrenheit  ${result.current.temp_f}°F`);
   console.log(`The weather is ${result.current.condition.text}`);
+  console.log(`The UV is ${result.current.uv}`);
   console.log(`Humidity: ${result.current.humidity}g.m-3`);
   console.log(`Wind direction: ${result.current.wind_dir}`);
   console.log(`Icon: https:${result.current.condition.icon}`);
@@ -33,7 +34,7 @@ let currentWeatherConditionImgEl = document.querySelector("img");
 const form = document.querySelector("form");
 const searchBarEl = document.getElementById("searchBar");
 const searchBtnEl = document.getElementById("searchBtn");
-const clearBtnEl = document.getElementById("clearBtn");
+// const clearBtnEl = document.getElementById("clearBtn");
 
 //! The Listeners
 searchBarEl.addEventListener("input", () => {
@@ -46,10 +47,11 @@ searchBtnEl.addEventListener("click", () => {
   form.reset();
   searchInputValue = "";
 });
-clearBtnEl.addEventListener("click", () => {
-  event.preventDefault();
-  form.reset();
-  searchInputValue = "";
-});
+
+// clearBtnEl.addEventListener("click", () => {
+//   event.preventDefault();
+//   form.reset();
+//   searchInputValue = "";
+// });
 
 getInfo(searchInputValue);
